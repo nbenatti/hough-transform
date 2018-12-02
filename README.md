@@ -1,6 +1,6 @@
 # hough-transform
 
-C++ implementation of the <a href="https://en.wikipedia.org/wiki/Hough_transform">hough transform algorithm</a>.<br>
+C++ implementation of the <a href="https://en.wikipedia.org/wiki/Hough_transform">hough transform </a>algorithm.<br>
 
 <b>compile with:</b> g++ hough.cpp [-Wall] -o[1|2|3] -o hough -std=c++11 <br>
 <b>usage:</b> hough [input-image-path] [treshold] <br>
