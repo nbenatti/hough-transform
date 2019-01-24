@@ -55,7 +55,7 @@ int main(int argc, char** argv) {
 
     deque<pair<int, int>> edgePoints;  // <row, col>
 
-    source = imread(/*"sudoku.png"*/argv[1], IMREAD_GRAYSCALE);
+    source = imread(argv[1], IMREAD_GRAYSCALE);
     namedWindow("source image", WINDOW_NORMAL | WINDOW_KEEPRATIO);
 
     output = source.clone();
