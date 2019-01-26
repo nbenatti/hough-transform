@@ -10,33 +10,20 @@
 using namespace std;
 using namespace cv;
 
-#define BIN_WIDTH 1                // quanti gradi all'interno della stessa categoria
+#define BIN_WIDTH 1                // quanti gradi all'interno della stessa categoria di voto
 #define NUM_BINS 180 / BIN_WIDTH   // numero di categorie
 
-/*== PARAMETRI PER CANNY EDGE DETECTION === */
+/* === PARAMETRI PER CANNY EDGE DETECTION === */
 
 #define KERNEL_SIZE 3
 #define TRESHOLD 50
 #define RATIO 3
 
-void detectEdge(const Mat& in, Mat& out) {
+void detectEdge(const Mat& in, Mat& out);
 
-    blur(in, out, Size(3, 3));  // per immunità al rumore, sfocatura
+ostream& operator<<(ostream& out, vector<vector<int>> v);
 
-    Canny(out, out, TRESHOLD, TRESHOLD*RATIO, KERNEL_SIZE);
-}
-
-ostream& operator<<(ostream& out, vector<vector<int>> v) {
-
-    for(int i = 0; i < v.size(); ++i) {
-        for(int j = 0; j < v[i].size(); ++j) {
-            cout<< v[i][j] << " ";
-        }
-        cout<<"\n";
-    }
-
-    return out;
-}
+void polarToCartesian(double rho, int theta, Point& p1, Point& p2);
 
 int main(int argc, char** argv) {
 
@@ -94,7 +81,7 @@ int main(int argc, char** argv) {
         }
     }
 
-    cout<< votes <<"\n";
+    //cout<< votes <<"\n";
 
     // find peaks
     for(i = 0; i < votes.size(); ++i) {
@@ -111,14 +98,16 @@ int main(int argc, char** argv) {
 
                 Point p1, p2;   // 2 punti che descrivono la linea
 
-                int x0 = cvRound( rho * cos(theta) );
+                /*int x0 = cvRound( rho * cos(theta) );
                 int y0 = cvRound( rho * sin(theta) );
 
                 p1.x = cvRound( x0 + 1000*(-sin(theta)) );
                 p1.y = cvRound( y0 + 1000*(cos(theta)) );
 
                 p2.x = cvRound( x0 - 1000*(-sin(theta)) );
-                p2.y = cvRound( y0 - 1000*(cos(theta)) );
+                p2.y = cvRound( y0 - 1000*(cos(theta)) );*/
+
+				polarToCartesian(rho, theta, p1, p2);
 
                 //cout<< p1 << ", " << p2 <<"\n";
 
@@ -140,4 +129,35 @@ int main(int argc, char** argv) {
 
 
     return 0;
+}
+
+void detectEdge(const Mat& in, Mat& out) {
+
+	blur(in, out, Size(3, 3));  // per immunità al rumore, sfocatura
+
+	Canny(out, out, TRESHOLD, TRESHOLD*RATIO, KERNEL_SIZE);
+}
+
+ostream& operator<<(ostream& out, vector<vector<int>> v) {
+
+	for (int i = 0; i < v.size(); ++i) {
+		for (int j = 0; j < v[i].size(); ++j) {
+			cout << v[i][j] << " ";
+		}
+		cout << "\n";
+	}
+
+	return out;
+}
+
+void polarToCartesian(double rho, int theta, Point& p1, Point& p2) {
+
+	int x0 = cvRound(rho * cos(theta));
+	int y0 = cvRound(rho * sin(theta));
+
+	p1.x = cvRound(x0 + 1000 * (-sin(theta)));
+	p1.y = cvRound(y0 + 1000 * (cos(theta)));
+
+	p2.x = cvRound(x0 - 1000 * (-sin(theta)));
+	p2.y = cvRound(y0 - 1000 * (cos(theta)));
 }
