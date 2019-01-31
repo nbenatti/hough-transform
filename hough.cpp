@@ -97,17 +97,7 @@ int main(int argc, char** argv) {
                 // converti linea da polare a cartesiana
 
                 Point p1, p2;   // 2 punti che descrivono la linea
-
-                /*int x0 = cvRound( rho * cos(theta) );
-                int y0 = cvRound( rho * sin(theta) );
-
-                p1.x = cvRound( x0 + 1000*(-sin(theta)) );
-                p1.y = cvRound( y0 + 1000*(cos(theta)) );
-
-                p2.x = cvRound( x0 - 1000*(-sin(theta)) );
-                p2.y = cvRound( y0 - 1000*(cos(theta)) );*/
-
-				polarToCartesian(rho, theta, p1, p2);
+		polarToCartesian(rho, theta, p1, p2);
 
                 //cout<< p1 << ", " << p2 <<"\n";
 
