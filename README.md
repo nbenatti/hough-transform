@@ -1,7 +1,7 @@
 # Hough Transform
 
 C++ implementation of the [Hough transform](https://en.wikipedia.org/wiki/Hough_transform) algorithm.  
-(For a simpler, less *Academic* explanation and a nice Python implementation, you may look [here](https://alyssaq.github.io/2014/understanding-hough-transform) 😉)
+(For a simpler, less *Academic* explanation and a nice Python implementation, you may look [here](https://alyssaq.github.io/2014/understanding-hough-transform))
 
 ## Build and Run
 
